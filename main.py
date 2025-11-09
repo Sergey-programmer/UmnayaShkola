@@ -1,13 +1,9 @@
-from dotenv import load_dotenv
-import os
-from aiogram import Bot, Dispatcher, executor, types
+from telebot import TeleBot
 
-load_dotenv()
-bot = Bot(os.getenv("BOT_TOKEN"))
-dp = Dispatcher(bot)
+bot = TeleBot("8214900835:AAFUHZMvLIbf-6rTlP1q2YirhQCJBK216nQ")
 
-@dp.message_handler(commands=["start"])
-async def start(message: types.Message):
-  await message.answer("Всё работает!")
+@bot.message_handler(commands=["start"])
+def start(message):
+    bot.send_message(message.chat.id, "Всё работает!")
 
-executor.start_polling(dp)
+bot.polling(non_stop=True)
